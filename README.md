@@ -1,3 +1,5 @@
+First project/sandbox with SolidJS
+
 ## Usage
 
 ```bash
@@ -23,3 +25,9 @@ It correctly bundles Solid in production mode and optimizes the build for the be
 ## Deployment
 
 You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
+
+## TODO
+[ ] Load words dynamically (en vs pl)
+[ ] Refactor <Word /> component
+[ ] Add keyboard view under the guesses
+[ ] (Optional) Display word meaning with dictionary API

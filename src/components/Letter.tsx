@@ -1,8 +1,8 @@
-import { children, Component, JSX, mergeProps } from "solid-js";
+import { children, Component, mergeProps } from "solid-js";
 
 interface LetterProps {
   class?: string;
-  children: JSX.Element;
+  children: string;
 }
 
 const Letter: Component<LetterProps> = (props) => {
@@ -10,10 +10,12 @@ const Letter: Component<LetterProps> = (props) => {
   const c = children(() => props.children);
 
   return (
-    <div class={`w-12 h-12 border-blue-400 flex items-center justify-center text-xl  text-white rounded ${mergedProps.class}`}>
+    <div
+      class={`w-12 h-12 border-blue-400 flex items-center justify-center text-xl  text-white rounded ${mergedProps.class}`}
+    >
       {c()}
     </div>
-  )
-}
+  );
+};
 
 export default Letter;
