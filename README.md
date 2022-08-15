@@ -27,7 +27,12 @@ It correctly bundles Solid in production mode and optimizes the build for the be
 You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
 
 ## TODO
-[ ] Load words dynamically (en vs pl)
+[ ] Load words dynamically (EN /PL)
+
 [ ] Refactor <Word /> component
+
 [ ] Add keyboard view under the guesses
+
+[ ] Fix displaying multiple occurances of a letter (i.e. if a word contains one R and the user types a word with two Rs then both will be highlighted)
+
 [ ] (Optional) Display word meaning with dictionary API
