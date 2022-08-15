@@ -1,4 +1,4 @@
-import { Component, mergeProps } from "solid-js";
+import { Component, JSX, mergeProps } from "solid-js";
 import Letter from "./Letter";
 
 export enum Hint {
@@ -7,7 +7,7 @@ export enum Hint {
   NOT_IN_WORD = "notInWord"
 }
 
-interface WordProps {
+interface WordProps extends Pick<JSX.CustomAttributes<HTMLDivElement>, "classList"> {
   hints: Array<Hint>
   word: string;
 }
@@ -23,10 +23,10 @@ const getBackgroundForHint = (hint: Hint) => {
 }
 
 const Word: Component<WordProps> = (props) => {
-  const mergedProps = mergeProps({ word: "", hints: [] }, props);
+  const mergedProps = mergeProps({ word: "", hints: [], classList: undefined }, props);
 
   return (
-    <div class="flex flex-row mb-4">
+    <div classList={mergedProps.classList} class="flex flex-row mb-4">
       <Letter class={`mr-2 ${getBackgroundForHint(mergedProps.hints[0])}`}>{mergedProps.word[0]}</Letter>
       <Letter class={`mr-2 ${getBackgroundForHint(mergedProps.hints[1])}`}>{mergedProps.word[1]}</Letter>
       <Letter class={`mr-2 ${getBackgroundForHint(mergedProps.hints[2])}`}>{mergedProps.word[2]}</Letter>

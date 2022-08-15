@@ -6,7 +6,8 @@ const getRandomWord = () => {
   return WORDS[Math.floor(Math.random() * WORDS.length)];
 }
 
-const DEFAULT_WORDS_STATE = ["", "", "", "", ""]
+
+const DEFAULT_WORDS_STATE = ["", "", "", "", ""];
 
 const App: Component = () => {
   const [randomWord, setRandomWord] = createSignal(getRandomWord());
@@ -15,6 +16,8 @@ const App: Component = () => {
 
   const userHasWon = () => words().some(word => word === randomWord());
   const hasGameEnded = () => words()[words().length - 1].length > 0 || userHasWon(); 
+
+  const [invalidWordSubmitted, setInvalidWordSubmitted] = createSignal(false);
 
   const restartGame = () => {
     setWords(DEFAULT_WORDS_STATE);
@@ -55,6 +58,14 @@ const App: Component = () => {
     };
 
     if (event.code === "Enter" && userWord().length === 5) {
+      if (!WORDS.includes(userWord().toLowerCase())) {
+        setInvalidWordSubmitted(true);
+
+        setTimeout(() => setInvalidWordSubmitted(false), 300);
+
+        return;
+      }
+
       setWords(prev => prev.map((val, index) => {
         if (index === editableIndex()) {
           return userWord();
@@ -91,7 +102,7 @@ const App: Component = () => {
         <For each={words()}>
           {(word, index) => {
             return  (
-              <Word hints={getWordHints(word)} word={editableIndex() === index() ? userWord() : word}  />
+              <Word hints={getWordHints(word)} word={editableIndex() === index() ? userWord() : word} classList={{ "animate-shake": editableIndex() === index() && invalidWordSubmitted() }}  />
             )
           }}
         </For>
